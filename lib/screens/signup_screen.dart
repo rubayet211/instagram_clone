@@ -10,22 +10,24 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:instagram_clone/utils/colors.dart';
 import 'package:instagram_clone/widgets/text_field_input.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
 
   @override
   void dispose() {
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+    _usernameController.dispose();
   }
 
   @override
@@ -49,6 +51,14 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(
                 height: 64,
+              ),
+              TextFieldInput(
+                textEditingController: _usernameController,
+                hintText: 'Enter your username',
+                textInputType: TextInputType.name,
+              ),
+              const SizedBox(
+                height: 24,
               ),
               TextFieldInput(
                 textEditingController: _emailController,
@@ -75,28 +85,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   decoration: const ShapeDecoration(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(
-                        Radius.circular(18),
+                        Radius.circular(12),
                       ),
                     ),
                     color: blueColor,
                   ),
-                  child: const Text("Login"),
+                  child: const Text("Signup"),
                 ),
               ),
               const SizedBox(
                 height: 12,
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 8,
-                ),
-                child: const Text(
-                  "Forgotten Password?",
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
               ),
               const SizedBox(
                 height: 12,
@@ -112,7 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     padding: const EdgeInsets.symmetric(
                       vertical: 8,
                     ),
-                    child: const Text("Don't have an account yet? "),
+                    child: const Text("Already have an account? "),
                   ),
                   GestureDetector(
                     onTap: () {},
@@ -121,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         vertical: 8,
                       ),
                       child: const Text(
-                        "Register",
+                        "Log in",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
