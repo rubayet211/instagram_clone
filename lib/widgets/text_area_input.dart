@@ -7,13 +7,13 @@ class TextAreaInput extends StatelessWidget {
   final String hintText;
   final TextInputType textInputType;
 
-  const TextAreaInput(
-      {Key? key,
-      required this.textEditingController,
-      this.isPass = false,
-      required this.hintText,
-      required this.textInputType})
-      : super(key: key);
+  const TextAreaInput({
+    Key? key,
+    required this.textEditingController,
+    this.isPass = false,
+    required this.hintText,
+    required this.textInputType,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +31,7 @@ class TextAreaInput extends StatelessWidget {
           contentPadding: const EdgeInsets.all(8)),
       keyboardType: textInputType,
       obscureText: isPass,
+      maxLines: null, // This allows for multiline input
     );
   }
 }

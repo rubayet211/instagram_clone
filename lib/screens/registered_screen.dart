@@ -28,22 +28,34 @@ class _RegisteredScreenState extends State<RegisteredScreen> {
         ),
       ),
       body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 32),
+        padding: const EdgeInsets.symmetric(horizontal: 40),
         width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Flexible(
-              flex: 2,
+              flex: 1,
               child: Container(),
             ),
-            SvgPicture.asset(
-              'assets/images/ic_instagram.svg',
-              height: 64,
-              color: primaryColor,
+            Stack(
+              children: [
+                CircleAvatar(
+                  radius: 64,
+                  backgroundImage: NetworkImage(
+                      "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
+                ),
+                Positioned(
+                  bottom: -10,
+                  left: 80,
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.add_a_photo),
+                  ),
+                ),
+              ],
             ),
             const SizedBox(
-              height: 64,
+              height: 24,
             ),
             TextFieldInput(
               textEditingController: _fullnameController,
