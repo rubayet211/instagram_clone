@@ -1,6 +1,10 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:instagram_clone/utils/colors.dart';
+import 'package:instagram_clone/utils/utils.dart';
 import 'package:instagram_clone/widgets/text_area_input.dart';
 import 'package:instagram_clone/widgets/text_field_input.dart';
 
@@ -14,6 +18,20 @@ class RegisteredScreen extends StatefulWidget {
 class _RegisteredScreenState extends State<RegisteredScreen> {
   final TextEditingController _fullnameController = TextEditingController();
   final TextEditingController _bioController = TextEditingController();
+  Uint8List? _image;
+
+  void dispose() {
+    super.dispose();
+    _fullnameController.dispose();
+    _bioController.dispose();
+  }
+
+  void selectImage() async {
+    Uint8List image = await pickImage(ImageSource.gallery);
+    setState(() {
+      _image = image;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,16 +57,21 @@ class _RegisteredScreenState extends State<RegisteredScreen> {
             ),
             Stack(
               children: [
-                CircleAvatar(
-                  radius: 64,
-                  backgroundImage: NetworkImage(
-                      "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-                ),
+                _image != null
+                    ? CircleAvatar(
+                        radius: 64,
+                        backgroundImage: MemoryImage(_image!),
+                      )
+                    : const CircleAvatar(
+                        radius: 64,
+                        backgroundImage: NetworkImage(
+                            "https://miro.medium.com/v2/resize:fit:2000/1*rupxSxU5pKa_HDZ7zYGdqg.jpeg"),
+                      ),
                 Positioned(
                   bottom: -10,
                   left: 80,
                   child: IconButton(
-                    onPressed: () {},
+                    onPressed: selectImage,
                     icon: Icon(Icons.add_a_photo),
                   ),
                 ),
